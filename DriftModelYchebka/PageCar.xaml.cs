@@ -25,6 +25,16 @@ namespace Drift
         {
             InitializeComponent();
             CarListView.ItemsSource = App.dbContext.cars.Local.ToList();
+
+            //19.03.22
+            if (App.User?.Role == 1 || App.User?.Role == 3)
+            {
+                addCarButton.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                addCarButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)

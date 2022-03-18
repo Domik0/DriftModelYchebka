@@ -31,5 +31,14 @@ namespace DriftModelYchebka
 
         public virtual Pilot Pilots { get; set; }
         public virtual Stage Stages { get; set; }
+
+        [NotMapped]
+        public User User 
+        {
+            get
+            {
+                return App.User;
+            }
+        }  
     }
 }

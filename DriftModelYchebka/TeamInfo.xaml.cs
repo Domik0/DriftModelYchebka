@@ -42,6 +42,15 @@ namespace Drift
                     EditTeamButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
                 }
                 DataContext = TeamClone;
+                //19.03.22
+                if (App.User?.Role == 1 || App.User?.Role == 3)
+                {
+                    EditTeamButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    EditTeamButton.Visibility = Visibility.Visible;
+                }
             }
         }
 

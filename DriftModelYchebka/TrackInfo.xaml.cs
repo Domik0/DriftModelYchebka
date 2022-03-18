@@ -44,6 +44,15 @@ namespace Drift
                     EditTrackButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
                 }
                 DataContext = _tracksesClone;
+                //19.03.22
+                if (App.User?.Role == 1 || App.User?.Role == 3)
+                {
+                    EditTrackButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    EditTrackButton.Visibility = Visibility.Visible;
+                }
             }
         }
 

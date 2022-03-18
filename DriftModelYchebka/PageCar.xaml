@@ -76,15 +76,16 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-        <Button Grid.Row="1" Width="70" Height="70" Margin="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" Click="CarAddClick">
+        <Button Name="addCarButton" Grid.Row="1" Width="70" Height="70" Margin="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" Click="CarAddClick">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border CornerRadius="35" Background="#C4C4C4" BorderBrush="Black" BorderThickness="2"/>
+                    <Grid>
+                        <Border CornerRadius="35" Background="#C4C4C4" BorderBrush="Black" BorderThickness="2"/>
+                        <Border Background="Black" CornerRadius="2" Height="4" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Background="Black" CornerRadius="2" Height="50" Width="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Border Grid.Row="1" Background="Black" CornerRadius="2" Height="4" Width="50" Margin="70,93" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <Border Grid.Row="1" Background="Black" CornerRadius="2" Height="50" Width="4" Margin="93,70" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-
     </Grid>
 </Page>

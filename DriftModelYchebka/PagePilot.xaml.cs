@@ -24,6 +24,16 @@ namespace Drift
         public PagePilot()
         {
             InitializeComponent();
+
+            //19.03.22
+            if (App.User?.Role == 1 || App.User?.Role == 3)
+            {
+                addPilotButton.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                addPilotButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)

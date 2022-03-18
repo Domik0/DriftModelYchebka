@@ -43,6 +43,14 @@ namespace Drift
                     WheelWidth = carSelect.WheelWidth,
                     ImageCar = carSelect.ImageCar
                 };
+                if (App.User?.Role == 1 || App.User?.Role == 3)
+                {
+                    EditCarButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    EditCarButton.Visibility = Visibility.Visible;
+                }
 
                 if (select.Model == null)
                 {

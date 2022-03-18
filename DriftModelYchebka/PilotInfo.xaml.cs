@@ -60,6 +60,15 @@ namespace Drift
                     pilotClone.Teams = App.dbContext.teams.Where(t => t.Id == 0).First();
                 }
             }
+            //19.03.22
+            if (App.User?.Role == 1 || App.User?.Role == 3)
+            {
+                EditPilotButton.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                EditPilotButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)

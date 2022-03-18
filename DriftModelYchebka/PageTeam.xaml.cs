@@ -25,6 +25,16 @@ namespace Drift
         {
             InitializeComponent();
             TeamListView.ItemsSource = App.dbContext.teams.Local.ToList();
+
+            //19.03.22
+            if (App.User?.Role == 1 || App.User?.Role == 3)
+            {
+                addTeamButton.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                addTeamButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)

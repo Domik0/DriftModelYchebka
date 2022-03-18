@@ -60,12 +60,14 @@
         <Button Name="addTournamentButton" Width="70" Height="70" Grid.Column="0" Margin="60" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" Click="TournamentAddClick">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border CornerRadius="35" Background="#C4C4C4"/>
+                    <Grid>
+                        <Border CornerRadius="35" Background="#C4C4C4"/>
+                        <Border Background="#9E328D" CornerRadius="2" Height="4" Width="50" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Background="#9E328D" CornerRadius="2" Height="50" Width="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Border Background="#9E328D" CornerRadius="2" Height="4" Width="50" Grid.Column="0" Margin="70,93" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <Border Background="#9E328D" CornerRadius="2" Height="50" Width="4" Grid.Column="0" Margin="93,70" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <Frame Grid.Column="1" x:Name="TournamentInfo" x:FieldModifier="public"/>
+          <Frame Grid.Column="1" x:Name="TournamentInfo" x:FieldModifier="public"/>
     </Grid>
 </Page>
