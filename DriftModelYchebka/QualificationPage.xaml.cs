@@ -43,6 +43,20 @@ namespace Drift
                 Tournaments = stageSelect.Tournaments,
                 Tracks = stageSelect.Tracks
             };
+
+            //19.03.22
+            if (App.User?.Role == 1 || App.User?.Role == 3)
+            {
+                DelSelectQualification.Visibility = Visibility.Hidden;
+                AddSelectQualification.Visibility = Visibility.Hidden;
+                EditSelectQualification.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                DelSelectQualification.Visibility = Visibility.Visible;
+                AddSelectQualification.Visibility = Visibility.Visible;
+                EditSelectQualification.Visibility = Visibility.Visible;
+            }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)

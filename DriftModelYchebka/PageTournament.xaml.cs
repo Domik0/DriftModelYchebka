@@ -25,6 +25,16 @@ namespace Drift
             InitializeComponent();
             tournaments = App.dbContext.tournaments.Local;
             TournamentListView.ItemsSource = tournaments;
+
+            //19.03.22
+            if (App.User?.Role == 1 || App.User?.Role == 3)
+            {
+                addTournamentButton.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                addTournamentButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void SelectTournamentClick(object sender, RoutedEventArgs e)

@@ -53,6 +53,15 @@ namespace Drift
                     }
                 }
                 DataContext = tournamentClone;
+                //19.03.22
+                if (App.User?.Role == 1 || App.User?.Role == 3)
+                {
+                    EditTournamentButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    EditTournamentButton.Visibility= Visibility.Visible;
+                }
             }
         }
 
