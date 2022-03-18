@@ -13,6 +13,7 @@ namespace DriftModelYchebka
     /// </summary>
     public partial class App : Application
     {
+        public static User user { get; set; }
         public static DriftEntities dbContext = new DriftEntities();
     }
 }

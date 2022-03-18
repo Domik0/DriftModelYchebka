@@ -9,5 +9,5 @@
       MinHeight="750" MinWidth="1140"
       d:DesignHeight="750" d:DesignWidth="1140"
       Title="Drift"
-      Source="MainPage.xaml">
+      Source="StartPage.xaml">
 </NavigationWindow>
