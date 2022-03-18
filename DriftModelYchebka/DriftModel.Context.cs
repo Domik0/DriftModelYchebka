@@ -22,6 +22,7 @@ namespace DriftModelYchebka
         {
             try
             {
+                users.Load();
                 cars.Load();
                 pairArrivals.Load();
                 pilots.Load();
@@ -43,6 +44,7 @@ namespace DriftModelYchebka
             throw new UnintentionalCodeFirstException();
         }
 
+        public virtual DbSet<User> users { get; set; }
         public virtual DbSet<Car> cars { get; set; }
         public virtual DbSet<PairArrivals> pairArrivals { get; set; }
         public virtual DbSet<Pilot> pilots { get; set; }

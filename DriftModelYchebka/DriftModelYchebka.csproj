@@ -140,6 +140,9 @@
     <Compile Include="StageInfo.xaml.cs">
       <DependentUpon>StageInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Team.cs">
       <DependentUpon>DriftModel.tt</DependentUpon>
     </Compile>
@@ -226,6 +229,10 @@
     <Page Include="StageInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TeamInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
