@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DriftModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cars">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pilot_id" Type="int" />
+          <Property Name="model" Type="varchar" MaxLength="45" />
+          <Property Name="engine" Type="varchar" MaxLength="45" />
+          <Property Name="power" Type="varchar" MaxLength="45" />
+          <Property Name="wheel_width" Type="varchar" MaxLength="45" />
+          <Property Name="image_car" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="pair_arrivals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stages_id" Type="int" />
+          <Property Name="tour" Type="int" />
+          <Property Name="first_pilot_id" Type="int" />
+          <Property Name="second_pilot_id" Type="int" />
+          <Property Name="first_pilot_win" Type="bool" />
+        </EntityType>
+        <EntityType Name="pilots">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="team_id" Type="int" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" />
+          <Property Name="birthdate" Type="date" />
+          <Property Name="number" Type="int" />
+          <Property Name="city" Type="varchar" MaxLength="45" />
+          <Property Name="image_pilot" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="qualifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stages_id" Type="int" />
+          <Property Name="pilot_id" Type="int" />
+          <Property Name="point_first_attempt" Type="int" />
+          <Property Name="point_second_attempt" Type="int" />
+        </EntityType>
+        <EntityType Name="stages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="int" />
+          <Property Name="date" Type="date" />
+          <Property Name="tournament_id" Type="int" />
+          <Property Name="track_id" Type="int" />
+        </EntityType>
+        <EntityType Name="teams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="image_team" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tournaments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="image_tournaments" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tracks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="city" Type="varchar" MaxLength="45" />
+          <Property Name="image_track" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="fk_first_pilot_id">
+          <End Role="pilots" Type="Self.pilots" Multiplicity="0..1" />
+          <End Role="pair_arrivals" Type="Self.pair_arrivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pilots">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pair_arrivals">
+              <PropertyRef Name="first_pilot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pilot">
+          <End Role="pilots" Type="Self.pilots" Multiplicity="0..1" />
+          <End Role="cars" Type="Self.cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pilots">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="pilot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pilot_id">
+          <End Role="pilots" Type="Self.pilots" Multiplicity="0..1" />
+          <End Role="qualifications" Type="Self.qualifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pilots">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="qualifications">
+              <PropertyRef Name="pilot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_second_pilot_id">
+          <End Role="pilots" Type="Self.pilots" Multiplicity="0..1" />
+          <End Role="pair_arrivals" Type="Self.pair_arrivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pilots">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pair_arrivals">
+              <PropertyRef Name="second_pilot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_stages_id_pair">
+          <End Role="stages" Type="Self.stages" Multiplicity="0..1" />
+          <End Role="pair_arrivals" Type="Self.pair_arrivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stages">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pair_arrivals">
+              <PropertyRef Name="stages_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_stages_id_qual">
+          <End Role="stages" Type="Self.stages" Multiplicity="0..1" />
+          <End Role="qualifications" Type="Self.qualifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stages">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="qualifications">
+              <PropertyRef Name="stages_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_team">
+          <End Role="teams" Type="Self.teams" Multiplicity="0..1" />
+          <End Role="pilots" Type="Self.pilots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pilots">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tournaments">
+          <End Role="tournaments" Type="Self.tournaments" Multiplicity="0..1" />
+          <End Role="stages" Type="Self.stages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournaments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stages">
+              <PropertyRef Name="tournament_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_track">
+          <End Role="tracks" Type="Self.tracks" Multiplicity="0..1" />
+          <End Role="stages" Type="Self.stages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tracks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stages">
+              <PropertyRef Name="track_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DriftModelStoreContainer">
+          <EntitySet Name="cars" EntityType="Self.cars" Schema="u1255664_drift" store:Type="Tables" />
+          <EntitySet Name="pair_arrivals" EntityType="Self.pair_arrivals" Schema="u1255664_drift" store:Type="Tables" />
+          <EntitySet Name="pilots" EntityType="Self.pilots" Schema="u1255664_drift" store:Type="Tables" />
+          <EntitySet Name="qualifications" EntityType="Self.qualifications" Schema="u1255664_drift" store:Type="Tables" />
+          <EntitySet Name="stages" EntityType="Self.stages" Schema="u1255664_drift" store:Type="Tables" />
+          <EntitySet Name="teams" EntityType="Self.teams" Schema="u1255664_drift" store:Type="Tables" />
+          <EntitySet Name="tournaments" EntityType="Self.tournaments" Schema="u1255664_drift" store:Type="Tables" />
+          <EntitySet Name="tracks" EntityType="Self.tracks" Schema="u1255664_drift" store:Type="Tables" />
+          <AssociationSet Name="fk_first_pilot_id" Association="Self.fk_first_pilot_id">
+            <End Role="pilots" EntitySet="pilots" />
+            <End Role="pair_arrivals" EntitySet="pair_arrivals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pilot" Association="Self.fk_pilot">
+            <End Role="pilots" EntitySet="pilots" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pilot_id" Association="Self.fk_pilot_id">
+            <End Role="pilots" EntitySet="pilots" />
+            <End Role="qualifications" EntitySet="qualifications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_second_pilot_id" Association="Self.fk_second_pilot_id">
+            <End Role="pilots" EntitySet="pilots" />
+            <End Role="pair_arrivals" EntitySet="pair_arrivals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stages_id_pair" Association="Self.fk_stages_id_pair">
+            <End Role="stages" EntitySet="stages" />
+            <End Role="pair_arrivals" EntitySet="pair_arrivals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stages_id_qual" Association="Self.fk_stages_id_qual">
+            <End Role="stages" EntitySet="stages" />
+            <End Role="qualifications" EntitySet="qualifications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_team" Association="Self.fk_team">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="pilots" EntitySet="pilots" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tournaments" Association="Self.fk_tournaments">
+            <End Role="tournaments" EntitySet="tournaments" />
+            <End Role="stages" EntitySet="stages" />
+          </AssociationSet>
+          <AssociationSet Name="fk_track" Association="Self.fk_track">
+            <End Role="tracks" EntitySet="tracks" />
+            <End Role="stages" EntitySet="stages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DriftModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PilotId" Type="Int32" />
+          <Property Name="Model" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Engine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Power" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="WheelWidth" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ImageCar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pilots" Relationship="Self.fk_pilot" FromRole="Car" ToRole="pilots" />
+        </EntityType>
+        <EntityType Name="PairArrivals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StagesId" Type="Int32" />
+          <Property Name="Tour" Type="Int32" />
+          <Property Name="FirstPilotId" Type="Int32" />
+          <Property Name="SecondPilotId" Type="Int32" />
+          <Property Name="FirstPilotWin" Type="Boolean" />
+          <NavigationProperty Name="FirstPilot" Relationship="Self.fk_first_pilot_id" FromRole="PairArrivals" ToRole="pilots" />
+          <NavigationProperty Name="SecondPilot" Relationship="Self.fk_second_pilot_id" FromRole="PairArrival" ToRole="pilots" />
+          <NavigationProperty Name="Stages" Relationship="Self.fk_stages_id_pair" FromRole="PairArrivals" ToRole="stages" />
+        </EntityType>
+        <EntityType Name="Pilot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamId" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Birthdate" Type="DateTime" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ImagePilot" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.fk_pilot" FromRole="pilots" ToRole="Car" />
+          <NavigationProperty Name="LeaderPairArrivals" Relationship="Self.fk_first_pilot_id" FromRole="pilots" ToRole="PairArrivals" />
+          <NavigationProperty Name="HauntingPairArrivals" Relationship="Self.fk_second_pilot_id" FromRole="pilots" ToRole="PairArrival" />
+          <NavigationProperty Name="Qualifications" Relationship="Self.fk_pilot_id" FromRole="pilots" ToRole="Qualification" />
+          <NavigationProperty Name="Teams" Relationship="Self.fk_team" FromRole="Pilot" ToRole="teams" />
+        </EntityType>
+        <EntityType Name="Qualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StagesId" Type="Int32" />
+          <Property Name="PilotId" Type="Int32" />
+          <Property Name="PointFirstAttempt" Type="Int32" />
+          <Property Name="PointSecondAttempt" Type="Int32" />
+          <NavigationProperty Name="Pilots" Relationship="Self.fk_pilot_id" FromRole="Qualification" ToRole="pilots" />
+          <NavigationProperty Name="Stages" Relationship="Self.fk_stages_id_qual" FromRole="Qualification" ToRole="stages" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="TournamentId" Type="Int32" />
+          <Property Name="TrackId" Type="Int32" />
+          <NavigationProperty Name="PairArrivals" Relationship="Self.fk_stages_id_pair" FromRole="stages" ToRole="PairArrivals" />
+          <NavigationProperty Name="Qualifications" Relationship="Self.fk_stages_id_qual" FromRole="stages" ToRole="Qualification" />
+          <NavigationProperty Name="Tournaments" Relationship="Self.fk_tournaments" FromRole="Stage" ToRole="tournaments" />
+          <NavigationProperty Name="Tracks" Relationship="Self.fk_track" FromRole="Stage" ToRole="tracks" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ImageTeam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pilots" Relationship="Self.fk_team" FromRole="teams" ToRole="Pilot" />
+        </EntityType>
+        <EntityType Name="Tournament">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ImageTournaments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Stages" Relationship="Self.fk_tournaments" FromRole="tournaments" ToRole="Stage" />
+        </EntityType>
+        <EntityType Name="Tracks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ImageTrack" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Stages" Relationship="Self.fk_track" FromRole="tracks" ToRole="Stage" />
+        </EntityType>
+        <Association Name="fk_pilot">
+          <End Role="pilots" Type="DriftModel.Pilot" Multiplicity="0..1" />
+          <End Role="Car" Type="DriftModel.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pilots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="PilotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_first_pilot_id">
+          <End Role="pilots" Type="DriftModel.Pilot" Multiplicity="0..1" />
+          <End Role="PairArrivals" Type="DriftModel.PairArrivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pilots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PairArrivals">
+              <PropertyRef Name="FirstPilotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_second_pilot_id">
+          <End Role="pilots" Type="DriftModel.Pilot" Multiplicity="0..1" />
+          <End Role="PairArrival" Type="DriftModel.PairArrivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pilots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PairArrival">
+              <PropertyRef Name="SecondPilotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_stages_id_pair">
+          <End Role="stages" Type="DriftModel.Stage" Multiplicity="0..1" />
+          <End Role="PairArrivals" Type="DriftModel.PairArrivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PairArrivals">
+              <PropertyRef Name="StagesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pilot_id">
+          <End Role="pilots" Type="DriftModel.Pilot" Multiplicity="0..1" />
+          <End Role="Qualification" Type="DriftModel.Qualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pilots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Qualification">
+              <PropertyRef Name="PilotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_team">
+          <End Role="teams" Type="DriftModel.Team" Multiplicity="0..1" />
+          <End Role="Pilot" Type="DriftModel.Pilot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pilot">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_stages_id_qual">
+          <End Role="stages" Type="DriftModel.Stage" Multiplicity="0..1" />
+          <End Role="Qualification" Type="DriftModel.Qualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Qualification">
+              <PropertyRef Name="StagesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tournaments">
+          <End Role="tournaments" Type="DriftModel.Tournament" Multiplicity="0..1" />
+          <End Role="Stage" Type="DriftModel.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournaments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="TournamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_track">
+          <End Role="tracks" Type="DriftModel.Tracks" Multiplicity="0..1" />
+          <End Role="Stage" Type="DriftModel.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tracks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="TrackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DriftEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cars" EntityType="DriftModel.Car" />
+          <EntitySet Name="pair_arrivals" EntityType="DriftModel.PairArrivals" />
+          <EntitySet Name="pilots" EntityType="DriftModel.Pilot" />
+          <EntitySet Name="qualifications" EntityType="DriftModel.Qualification" />
+          <EntitySet Name="stages" EntityType="DriftModel.Stage" />
+          <EntitySet Name="teams" EntityType="DriftModel.Team" />
+          <EntitySet Name="tournaments" EntityType="DriftModel.Tournament" />
+          <EntitySet Name="tracks" EntityType="DriftModel.Tracks" />
+          <AssociationSet Name="fk_pilot" Association="Self.fk_pilot">
+            <End Role="pilots" EntitySet="pilots" />
+            <End Role="Car" EntitySet="cars" />
+          </AssociationSet>
+          <AssociationSet Name="fk_first_pilot_id" Association="Self.fk_first_pilot_id">
+            <End Role="pilots" EntitySet="pilots" />
+            <End Role="PairArrivals" EntitySet="pair_arrivals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_second_pilot_id" Association="Self.fk_second_pilot_id">
+            <End Role="pilots" EntitySet="pilots" />
+            <End Role="PairArrival" EntitySet="pair_arrivals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stages_id_pair" Association="Self.fk_stages_id_pair">
+            <End Role="stages" EntitySet="stages" />
+            <End Role="PairArrivals" EntitySet="pair_arrivals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pilot_id" Association="Self.fk_pilot_id">
+            <End Role="pilots" EntitySet="pilots" />
+            <End Role="Qualification" EntitySet="qualifications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_team" Association="Self.fk_team">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="Pilot" EntitySet="pilots" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stages_id_qual" Association="Self.fk_stages_id_qual">
+            <End Role="stages" EntitySet="stages" />
+            <End Role="Qualification" EntitySet="qualifications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tournaments" Association="Self.fk_tournaments">
+            <End Role="tournaments" EntitySet="tournaments" />
+            <End Role="Stage" EntitySet="stages" />
+          </AssociationSet>
+          <AssociationSet Name="fk_track" Association="Self.fk_track">
+            <End Role="tracks" EntitySet="tracks" />
+            <End Role="Stage" EntitySet="stages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DriftModelStoreContainer" CdmEntityContainer="DriftEntities">
+          <EntitySetMapping Name="cars">
+            <EntityTypeMapping TypeName="DriftModel.Car">
+              <MappingFragment StoreEntitySet="cars">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="PilotId" ColumnName="pilot_id" />
+                <ScalarProperty Name="Model" ColumnName="model" />
+                <ScalarProperty Name="Engine" ColumnName="engine" />
+                <ScalarProperty Name="Power" ColumnName="power" />
+                <ScalarProperty Name="WheelWidth" ColumnName="wheel_width" />
+                <ScalarProperty Name="ImageCar" ColumnName="image_car" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pair_arrivals">
+            <EntityTypeMapping TypeName="DriftModel.PairArrivals">
+              <MappingFragment StoreEntitySet="pair_arrivals">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="StagesId" ColumnName="stages_id" />
+                <ScalarProperty Name="Tour" ColumnName="tour" />
+                <ScalarProperty Name="FirstPilotId" ColumnName="first_pilot_id" />
+                <ScalarProperty Name="SecondPilotId" ColumnName="second_pilot_id" />
+                <ScalarProperty Name="FirstPilotWin" ColumnName="first_pilot_win" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pilots">
+            <EntityTypeMapping TypeName="DriftModel.Pilot">
+              <MappingFragment StoreEntitySet="pilots">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="TeamId" ColumnName="team_id" />
+                <ScalarProperty Name="FirstName" ColumnName="first_name" />
+                <ScalarProperty Name="LastName" ColumnName="last_name" />
+                <ScalarProperty Name="Birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="Number" ColumnName="number" />
+                <ScalarProperty Name="City" ColumnName="city" />
+                <ScalarProperty Name="ImagePilot" ColumnName="image_pilot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qualifications">
+            <EntityTypeMapping TypeName="DriftModel.Qualification">
+              <MappingFragment StoreEntitySet="qualifications">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="StagesId" ColumnName="stages_id" />
+                <ScalarProperty Name="PilotId" ColumnName="pilot_id" />
+                <ScalarProperty Name="PointFirstAttempt" ColumnName="point_first_attempt" />
+                <ScalarProperty Name="PointSecondAttempt" ColumnName="point_second_attempt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stages">
+            <EntityTypeMapping TypeName="DriftModel.Stage">
+              <MappingFragment StoreEntitySet="stages">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Number" ColumnName="number" />
+                <ScalarProperty Name="Date" ColumnName="date" />
+                <ScalarProperty Name="TournamentId" ColumnName="tournament_id" />
+                <ScalarProperty Name="TrackId" ColumnName="track_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teams">
+            <EntityTypeMapping TypeName="DriftModel.Team">
+              <MappingFragment StoreEntitySet="teams">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="ImageTeam" ColumnName="image_team" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tournaments">
+            <EntityTypeMapping TypeName="DriftModel.Tournament">
+              <MappingFragment StoreEntitySet="tournaments">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="ImageTournaments" ColumnName="image_tournaments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tracks">
+            <EntityTypeMapping TypeName="DriftModel.Tracks">
+              <MappingFragment StoreEntitySet="tracks">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="City" ColumnName="city" />
+                <ScalarProperty Name="ImageTrack" ColumnName="image_track" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

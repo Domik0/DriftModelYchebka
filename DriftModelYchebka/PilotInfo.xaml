@@ -1,0 +1,106 @@
+﻿<Page x:Class="Drift.PilotInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Drift"
+      mc:Ignorable="d" 
+      d:DesignHeight="630" d:DesignWidth="1140"
+      Title="PilotInfo">
+
+    <Grid Background="#C4C4C4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Пилот" FontSize="36" HorizontalAlignment="Center" Margin="15"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" CornerRadius="30" BorderBrush="Black" BorderThickness="2" Margin="30,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="FirstNameLabel" Content="{Binding FirstName}" Grid.Row="0" FontSize="36" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="TextBoxFirstNamePilot" Text="{Binding FirstName}" BorderThickness="1" Grid.Row="0" Background="#C4C4C4" Visibility="Hidden" Width="330" FontSize="36"/>
+                    <Label x:Name="LastNameLabel" Content="{Binding LastName}" Grid.Row="1" FontSize="36" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="TextBoxLastNamePilot" Text="{Binding LastName}" BorderThickness="1" Grid.Row="1" Background="#C4C4C4" Visibility="Hidden" Width="330" FontSize="36"/>
+                    <Image x:Name="ImagePilot" Source="{Binding ImagePilot}" Grid.Row="2" Height="200" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="TextBoxImagePilot" Text="{Binding ImagePilot}" BorderThickness="1" Grid.Row="2" TextWrapping="Wrap" Background="#C4C4C4" Visibility="Hidden" Width="330" FontSize="36"/>
+                </Grid>
+            </Border>
+            <StackPanel Grid.Column="1">
+                <Grid Margin="15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="42"/>
+                        <RowDefinition Height="42"/>
+                        <RowDefinition Height="42"/>
+                        <RowDefinition Height="42"/>
+                        <RowDefinition Height="42"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="42"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Canvas Grid.Column="0" Grid.Row="0">
+                        <TextBlock x:Name="NameLabel" Text="{Binding Number,  StringFormat='{}Номер пилота: {0}'}" FontSize="28" Margin="15"/>
+                        <TextBox x:Name="TextBoxNamePilot" Text="{Binding Number}" BorderThickness="1" Background="#C4C4C4" Visibility="Hidden" Width="330" FontSize="28" Margin="15"/>
+                    </Canvas>
+                    <Button x:Name="EditPilotButton" Grid.Column="1" Grid.Row="0" Background="#C4C4C4" BorderThickness="1" HorizontalAlignment="Right" Width="42" Click="EditPilotClick">
+                        <Image Source="https://cdn.icon-icons.com/icons2/1558/PNG/512/353430-checkbox-edit-pen-pencil_107516.png"/>
+                    </Button>
+                    <Button x:Name="SavePilotButton" Grid.Column="1" Grid.Row="0" Background="#C4C4C4" BorderThickness="1" HorizontalAlignment="Right" Width="42" Visibility="Hidden" Click="SavePilotClick">
+                        <Image Source="https://cdn.icon-icons.com/icons2/1244/PNG/512/1492790860-8check_84164.png"/>
+                    </Button>
+
+                    <Canvas Grid.Column="0" Grid.Row="1">
+                        <TextBlock x:Name="CityLabel" Text="{Binding City, StringFormat='{}Город: {0}'}" FontSize="28" Margin="15"/>
+                        <TextBox x:Name="TextBoxCityPilot" Text="{Binding City}" BorderThickness="1" Background="#C4C4C4" Visibility="Hidden" Width="330" FontSize="28" Margin="15"/>
+                    </Canvas>
+                    <Button x:Name="DeletPilot" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Background="#C4C4C4" BorderThickness="0" HorizontalAlignment="Right" Click="DeletPilotClick">
+                        <Image Source="https://cdn.icon-icons.com/icons2/692/PNG/512/seo-social-web-network-internet_262_icon-icons.com_61518.png"/>
+                    </Button>
+
+                    <Canvas Grid.Column="0" Grid.Row="2">
+                        <TextBlock x:Name="BirthdateLabel" Text="{Binding Birthdate, StringFormat='{}Дата рождения: {0:dd/MM/yyyy}'}" FontSize="28" Margin="15"/>
+                        <TextBox x:Name="TextBoxBirthdatePilot" Text="{Binding Birthdate}" BorderThickness="1" Background="#C4C4C4" Visibility="Hidden" Width="330" FontSize="28" Margin="15"/>
+                    </Canvas>
+                    <Canvas Grid.Column="0" Grid.Row="3">
+                        <TextBlock x:Name="TeamLabel" Text="{Binding Team.Name, StringFormat='{}Команда: {0}'}" FontSize="28" Margin="15"/>
+                        <ComboBox Grid.Row="0" Margin="15"
+                                  x:Name="TeamComboBox"
+                                  SelectedItem="{Binding Team}"
+                                  Background="#FFC4C4C4" Visibility="Hidden" Width="330" FontSize="28"
+                                  FontFamily="Fonts/#Comfortaa Light"
+                                  BorderThickness="0" BorderBrush="#FFC4C4C4">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" FontSize="25" Margin="15,0"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Canvas>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <Button Grid.Row="2" Height="35" Width="160" Margin="20,0" Click="BackClick">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="15" Background="#8D8D8D" BorderThickness="1" BorderBrush="Black">
+                        <Label Grid.Column="0" Content="Назад"
+                                        FontSize="20"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</Page>
