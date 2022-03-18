@@ -22,6 +22,7 @@
         <AssociationConnector Association="DriftModel.fk_stages_id_qual" ManuallyRouted="false" />
         <AssociationConnector Association="DriftModel.fk_tournaments" ManuallyRouted="false" />
         <AssociationConnector Association="DriftModel.fk_track" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DriftModel.User" Width="1.5" PointX="1.625" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -158,6 +158,9 @@
     <Compile Include="TrackInfo.xaml.cs">
       <DependentUpon>TrackInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>DriftModel.tt</DependentUpon>
+    </Compile>
     <Page Include="CarInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -12,44 +12,27 @@ namespace DriftModelYchebka
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Windows;
-    using System.Diagnostics;
-
+    
     public partial class DriftEntities : DbContext
     {
         public DriftEntities()
             : base("name=DriftEntities")
         {
-            try
-            {
-                cars.Load();
-                pairArrivals.Load();
-                pilots.Load();
-                qualifications.Load();
-                stages.Load();
-                teams.Load();
-                tournaments.Load();
-                tracks.Load();
-            }
-            catch (System.Data.Entity.Core.EntityException)
-            {
-                MessageBox.Show("Отсутствует интернет подключение", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                Process.GetCurrentProcess().Kill();
-            }
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Car> cars { get; set; }
-        public virtual DbSet<PairArrivals> pairArrivals { get; set; }
+        public virtual DbSet<PairArrivals> pair_arrivals { get; set; }
         public virtual DbSet<Pilot> pilots { get; set; }
         public virtual DbSet<Qualification> qualifications { get; set; }
         public virtual DbSet<Stage> stages { get; set; }
         public virtual DbSet<Team> teams { get; set; }
         public virtual DbSet<Tournament> tournaments { get; set; }
         public virtual DbSet<Tracks> tracks { get; set; }
+        public virtual DbSet<User> user { get; set; }
     }
 }
