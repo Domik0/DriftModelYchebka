@@ -93,13 +93,13 @@
                                 <TextBlock Grid.Column="0">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} {1}">
-                                            <Binding Path="Pilot.FirstName"/>
-                                            <Binding Path="Pilot.LastName"/>
+                                            <Binding Path="Pilots.FirstName"/>
+                                            <Binding Path="Pilots.LastName"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
 
-                                <TextBlock Grid.Column="1" Text="{Binding Pilot.MainCar.Model}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Pilots.MainCar.Model}"/>
                                 <TextBox Grid.Column="2" x:Name="PFAttempt" Text="{Binding PointFirstAttempt}"/>
                                 <TextBox Grid.Column="3" x:Name="PSAttempt" Text="{Binding PointSecondAttempt}"/>
                                 <TextBlock Grid.Column="4" Text="{Binding BestAttempt}"/>
