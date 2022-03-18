@@ -57,7 +57,7 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-        <Button Width="70" Height="70" Grid.Column="0" Margin="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" Click="TournamentAddClick">
+        <Button Name="addTournamentButton" Width="70" Height="70" Grid.Column="0" Margin="60" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" Click="TournamentAddClick">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border CornerRadius="35" Background="#C4C4C4"/>

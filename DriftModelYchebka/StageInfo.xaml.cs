@@ -54,6 +54,16 @@ namespace Drift
                 }
                 DataContext = stageClone;
                 TracksComboBox.ItemsSource = App.dbContext.tracks.ToList();
+
+                //19.03.22
+                if (App.User?.Role == 1 || App.User?.Role == 3)
+                {
+                    EditStageButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    EditStageButton.Visibility = Visibility.Visible;
+                }
             }
         }
 

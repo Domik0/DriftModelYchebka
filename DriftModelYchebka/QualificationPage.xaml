@@ -100,7 +100,20 @@
                                 </TextBlock>
 
                                 <TextBlock Grid.Column="1" Text="{Binding Pilot.MainCar.Model}"/>
-                                <TextBox Grid.Column="2" x:Name="PFAttempt" Text="{Binding PointFirstAttempt}"/>
+                                <TextBox Grid.Column="2" x:Name="PFAttempt" Text="{Binding PointFirstAttempt}">
+                                    <!--19.03.22-->
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding App.User.Role}" Value="2">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                    <!--19.03.22-->
+                                </TextBox>
                                 <TextBox Grid.Column="3" x:Name="PSAttempt" Text="{Binding PointSecondAttempt}"/>
                                 <TextBlock Grid.Column="4" Text="{Binding BestAttempt}"/>
                                 <TextBlock Grid.Column="5" Text="{Binding PointForQualification}"/>
