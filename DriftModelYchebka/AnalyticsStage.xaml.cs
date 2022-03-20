@@ -21,19 +21,42 @@ namespace DriftModelYchebka
     /// </summary>
     public partial class AnalyticsStage : Page
     {
+        int tmpSotr = 0;
         Stage stageSelect;
         public AnalyticsStage(Stage select)
         {
             InitializeComponent();
             stageSelect = select;
             QualificationListView.ItemsSource = stageSelect.Qualifications;
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(QualificationListView.ItemsSource);
-            view.SortDescriptions.Add(new SortDescription("WinRate", ListSortDirection.Descending));
+            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(QualificationListView.ItemsSource);
+            //view.SortDescriptions.Add(new SortDescription("WinRate", ListSortDirection.Descending));
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void Sorted(object sender, MouseButtonEventArgs e)
+        {
+            switch (tmpSotr)
+            {
+                case 0:
+                    QualificationListView.ItemsSource = stageSelect.Qualifications.OrderByDescending(q => q.Pilots.WinRate);
+                    tmpSotr = 1;
+                    break;
+
+                case 1:
+                    QualificationListView.ItemsSource = stageSelect.Qualifications.OrderBy(q => q.Pilots.WinRate);
+                    tmpSotr = 2;
+                    break;
+
+                default:
+                    QualificationListView.ItemsSource = stageSelect.Qualifications;
+                    tmpSotr = 0;
+                    break;
+
+            }
         }
     }
 }

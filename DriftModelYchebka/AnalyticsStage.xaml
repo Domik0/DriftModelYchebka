@@ -36,7 +36,15 @@
                 </Grid.Resources>
                 <TextBlock Grid.Column="0" Text="Фамилия, имя"/>
                 <TextBlock Grid.Column="1" Text="Автомобиль"/>
-                <TextBlock Grid.Column="2" Text="Коэффициент"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Коэффициент" />
+                    <Image MouseUp="Sorted" 
+                           Source="Resources/kisspng_computer_icons.png"
+                           Width="40"
+                           Cursor="Hand"
+                           Margin="2,7,0,0"
+                           VerticalAlignment="Top"/>  
+                </StackPanel>
 
             </Grid>
 
@@ -79,7 +87,7 @@
                                     </TextBlock.Text>
                                 </TextBlock>
                                 <TextBlock Grid.Column="1" Text="{Binding Pilots.MainCar.Model}"/>
-                                <TextBlock Grid.Column="2" Text="{Binding Pilots.WinRate, StringFormat={}{0}%}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Pilots.WinRate, StringFormat={}{0:P}}"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>

@@ -21,6 +21,7 @@ namespace DriftModelYchebka
     /// </summary>
     public partial class AnalyticsPilot : Page
     {
+        int tmpSotr = 0;
         public AnalyticsPilot()
         {
             InitializeComponent();
@@ -39,6 +40,29 @@ namespace DriftModelYchebka
                 Pilot p = PilotListView.SelectedItem as Pilot;
                 NavigationService.Navigate(new PilotInfo(p));
                 PilotListView.SelectedItem = null;
+            }
+        }
+
+        private void Sorted(object sender, MouseButtonEventArgs e)
+        {
+
+            switch (tmpSotr)
+            {
+                case 0:
+                    PilotListView.ItemsSource = App.dbContext.pilots.ToList().OrderByDescending(p => p.WinRate);
+                    tmpSotr = 1;
+                    break;
+                    
+                case 1:
+                    PilotListView.ItemsSource = App.dbContext.pilots.ToList().OrderBy(p => p.WinRate);
+                    tmpSotr = 2;
+                    break;
+
+                default:
+                    PilotListView.ItemsSource = App.dbContext.pilots.ToList();
+                    tmpSotr = 0;
+                    break;
+
             }
         }
     }
