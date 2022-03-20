@@ -40,6 +40,34 @@ namespace DriftModelYchebka
             get => Cars.Count > 0 ? Cars.First() : null;
         }
 
+        [NotMapped]
+        public double WinCount
+        {
+            get
+            {
+                return LeaderPairArrivals.Where(lpa => lpa.FirstPilotWin == true).Count() +
+                    HauntingPairArrivals.Where(hpa => hpa.FirstPilotWin == false).Count();
+            }
+        }
+
+        [NotMapped]
+        public double ArrivalCount
+        {
+            get
+            {
+                return LeaderPairArrivals.Count() + HauntingPairArrivals.Count();
+            }
+        }
+
+        [NotMapped]
+        public double WinRate
+        {
+            get
+            {
+                return ArrivalCount != 0? WinCount / ArrivalCount : 0;
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Cars { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

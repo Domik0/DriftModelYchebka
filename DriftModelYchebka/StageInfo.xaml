@@ -73,7 +73,7 @@
                 </Button.Template>
             </Button>
 
-            <Button Grid.Column="1" Height="35" Margin="10,0" Click="PairArrivalsShowClick">
+            <Button x:Name="ButtonPairArrivals" Grid.Column="1" Height="35" Margin="10,0" Click="PairArrivalsShowClick">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border CornerRadius="15" Background="#8D8D8D"  BorderThickness="1" BorderBrush="Black">

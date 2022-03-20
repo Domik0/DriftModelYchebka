@@ -48,21 +48,21 @@
                                VerticalAlignment="Center"/>
                     </Button>
 
-                    <Button Style="{DynamicResource RoundButton}" Background="#C4C4C4" Height="45" Width="150"  Margin="30, 17" Click="TrackClick">
+                    <Button x:Name="ButtonTrack" Style="{DynamicResource RoundButton}" Background="#C4C4C4" Height="45" Width="150"  Margin="30, 17" Click="TrackClick">
                         <Label Content="Трассы"
                                FontSize="25"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
                     </Button>
 
-                    <Button Style="{DynamicResource RoundButton}" Background="#C4C4C4" Height="45" Width="200"  Margin="0, 17" Click="CarClick">
+                    <Button x:Name="ButtonCar" Style="{DynamicResource RoundButton}" Background="#C4C4C4" Height="45" Width="200"  Margin="0, 17" Click="CarClick">
                         <Label Content="Автомобили"
                                FontSize="25"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
                     </Button>
 
-                    <Button Style="{DynamicResource RoundButton}" Background="#C4C4C4" Height="45" Width="150"  Margin="30, 17" Click="TeamClick">
+                    <Button x:Name="ButtonTeam" Style="{DynamicResource RoundButton}" Background="#C4C4C4" Height="45" Width="150"  Margin="30, 17" Click="TeamClick">
                         <Label Content="Команды"
                                FontSize="25"
                                HorizontalAlignment="Center"

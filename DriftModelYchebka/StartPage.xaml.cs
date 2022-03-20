@@ -70,10 +70,10 @@ namespace DriftModelYchebka
         private void LogInClick(object sender, MouseButtonEventArgs e)
         {
             List<User> userList = App.dbContext.users.Where(us => us.Login == UserNameText.Text).ToList();
-            App.user = userList.Count != 0 ? userList.First() : null;
-            if (App.user != null && App.user.Password == PasswordBoxText.Password)
+            App.User = userList.Count != 0 ? userList.First() : null;
+            if (App.User != null && App.User.Password == PasswordBoxText.Password)
             {
-                switch (App.user.Role)
+                switch (App.User.Role)
                 {
                     case 1:
                         NavigationService.Navigate(new MainPage());

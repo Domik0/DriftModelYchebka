@@ -59,6 +59,11 @@ namespace Drift
                     pilotClone.TeamId = 0;
                     pilotClone.Teams = App.dbContext.teams.Where(t => t.Id == 0).First();
                 }
+                if(App.User?.Role == 3)
+                {
+                    WinCountLabel.Visibility = Visibility.Visible;
+                    ArrivalCountLabel.Visibility = Visibility.Visible;
+                }
             }
         }
 
