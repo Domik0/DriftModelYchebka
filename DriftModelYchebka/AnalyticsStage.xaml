@@ -14,7 +14,7 @@
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Аналитика квалификации" FontSize="36" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="0" Text="Аналитика" FontSize="36" HorizontalAlignment="Center"/>
         <Grid Grid.Row="0" Margin="30,60,30,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>

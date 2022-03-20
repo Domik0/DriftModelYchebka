@@ -60,7 +60,21 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0"  Height="35" Margin="10,0" Click="QualificationShowClick">
+            <Button x:Name="ButtonAnalytics" Grid.Column="0" Grid.ColumnSpan="2"  Height="35" Margin="10,0"
+                    Click="AnalyticsClick" Visibility="Hidden">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="15" Background="#8D8D8D" BorderThickness="1" BorderBrush="Black">
+                            <Label Grid.Column="0" Content="Квалификация"
+                                   FontSize="20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button x:Name="ButtonQualification" Grid.Column="0"  Height="35" Margin="10,0" Click="QualificationShowClick">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border CornerRadius="15" Background="#8D8D8D" BorderThickness="1" BorderBrush="Black">

@@ -66,7 +66,9 @@ namespace Drift
 
                 if(App.User?.Role == 3)
                 {
+                    ButtonQualification.Visibility = Visibility.Hidden;
                     ButtonPairArrivals.Visibility = Visibility.Hidden;
+                    ButtonAnalytics.Visibility = Visibility.Visible;
                 }
             }
         }
@@ -138,6 +140,13 @@ namespace Drift
                 DataContext = null;
                 DataContext = stageClone;
             }
+        }
+
+        private void AnalyticsClick(object sender, RoutedEventArgs e)
+        {
+            Stage s = DataContext as Stage;
+            MainPage mp = App.Current.MainWindow.Content as MainPage;
+            mp.mainFrame.NavigationService.Navigate(new AnalyticsStage(s));
         }
     }
 }
