@@ -14,7 +14,15 @@
             <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Пилоты" FontSize="36" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Center">
+            <Label Grid.Row="0" Content="Пилоты" FontSize="36" />
+            <Image MouseUp="Sorted" 
+                   Source="Resources/kisspng_computer_icons.png"
+                   Width="40"
+                   VerticalAlignment="Center"
+                   Cursor="Hand"/>
+        </StackPanel>
         <ListView Grid.Row="1" Background="#C4C4C4"
                   BorderThickness="0"
                   x:Name="PilotListView"
@@ -45,7 +53,7 @@
                             <Label Content="{Binding LastName}"
                                         FontSize="25"
                                         Margin="5"/>
-                            <Label Content="{Binding WinRate, StringFormat={}КД:{0}%}"
+                            <TextBlock Text="{Binding WinRate, StringFormat={}{0:P}}"
                                         FontSize="25"
                                         Margin="5"/>
                         </StackPanel>
