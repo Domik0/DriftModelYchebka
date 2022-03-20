@@ -54,8 +54,7 @@ namespace Drift
                 }
                 DataContext = stageClone;
                 TracksComboBox.ItemsSource = App.dbContext.tracks.ToList();
-
-                //19.03.22
+                
                 if (App.User?.Role == 1 || App.User?.Role == 3)
                 {
                     EditStageButton.Visibility = Visibility.Hidden;
@@ -64,21 +63,42 @@ namespace Drift
                 {
                     EditStageButton.Visibility = Visibility.Visible;
                 }
+
+                if(App.User?.Role == 3)
+                {
+                    ButtonPairArrivals.Visibility = Visibility.Hidden;
+                }
             }
         }
 
         private void QualificationShowClick(object sender, RoutedEventArgs e)
         {
             Stage s = DataContext as Stage;
-            MainPage mp = App.Current.MainWindow.Content as MainPage;
-            mp.mainFrame.NavigationService.Navigate(new QualificationPage(s));
+            MainPage mp = App.Current.MainWindow.Content as MainPage; 
+
+            if (App.User?.Role == 3)
+            {
+                mp.mainFrame.NavigationService.Navigate(new AnalyticsStage(s));
+            }
+            else
+            {
+                mp.mainFrame.NavigationService.Navigate(new QualificationPage(s));
+            }
         }
 
         private void PairArrivalsShowClick(object sender, RoutedEventArgs e)
         {
             Stage s = DataContext as Stage;
             MainPage mp = App.Current.MainWindow.Content as MainPage;
-            mp.mainFrame.NavigationService.Navigate(new PairArrivalsPage(s));
+
+            if (App.User?.Role == 3)
+            {
+                //mp.mainFrame.NavigationService.Navigate(new AnalyticsStage(s));
+            }
+            else
+            {
+                mp.mainFrame.NavigationService.Navigate(new PairArrivalsPage(s));
+            }
         }
 
         private void EditStageClick(object sender, RoutedEventArgs e)
